@@ -22,6 +22,13 @@ filings = SCCO.get_filings()
 
 # get data relating latest 10 10-K fillings
 TenKs = [x for x in SCCO.get_filings(form = '10-K').latest(10)]
+
+filings = edgar.get_filings(year = [2021,2022,2023,2024,2025], form = ['10-K','10-Q'], amendments=True).filter(cik=1001838)
+filings[0].obj().financials.get_income_statement().get_dataframe().head()
+filings[0].obj().financials.get_balance_sheet().get_dataframe().head()
+filings[0].obj().financials.get_cash_flow_statement().get_dataframe()
+
+
 print(TenKs[0].obj().financials.get_income_statement().get_dataframe().head())
 print(TenKs[1].obj().financials.get_income_statement().get_dataframe().head())
 print(TenKs[2].obj().financials.get_income_statement().get_dataframe().head())
